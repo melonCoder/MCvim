@@ -4,7 +4,6 @@ set number                                   "show row number
 set ruler                                    "display current cursor
 set guifont=Courier_New:h10:cANSI            "set font
 set nobackup                                 "no auto backup
-color molokai                                
 set tabstop=4
 set shiftwidth=2
 set expandtab                                "tab --> space
@@ -39,6 +38,8 @@ Plugin 'VundleVim/Vundle.vim'
 " Install your plugin here
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/taglist.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
 "
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -76,6 +77,8 @@ filetype plugin indent on    " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""END OF VUNDLE SETTING"""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+color molokai                                
 
 """"""""""""""keyword searching""""""""""""""
 set ignorecase smartcase   " not case sensetive, 
