@@ -2,7 +2,9 @@ set nocompatible                             "close compatible mode to avoid pre
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set number                                   "show row number
 set ruler                                    "display current cursor
-set guifont=Courier_New:h10:cANSI            "set font
+if has("gui_running")
+    set guifont=Courier_New:h10:cANSI            "set font
+endif
 set nobackup                                 "no auto backup
 set tabstop=4
 set shiftwidth=2
@@ -15,7 +17,7 @@ set autoindent
 set smartindent
 
 set tw=73
-set fo+=tcja "check h:fo-table for more details
+set fo+=tcj "check h:fo-table for more details
 "Mark ideal text width settings
 if v:version >= 703
     set colorcolumn=+1
@@ -40,6 +42,18 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
+"support of ack-grep
+    if executable('ack-grep')
+        let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+        Plugin 'mileszs/ack.vim'
+    endif
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'matchit.zip'
+
+" The following plguin are recommanded 
+" Plugin 'rhysd/conflict-marker.vim'
 "
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -65,7 +79,7 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 " filetype plugin on
 "
-" Brief help
+" Brief help :PluginList       - lists configured plugins :PluginInstall
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just
 " :PluginUpdate
@@ -90,23 +104,6 @@ set hlsearch               " highlight
 """""""""""""""""""bracket"""""""""""""""""""
 set showmatch                                "show matched bracket
 set matchtime=2                              
-
-:inoremap ( ()<ESC>i
-:inoremap ) <c-r>=ClosePair(')')<CR>
-:inoremap { {}<ESC>i
-:inoremap } <c-r>=ClosePair('}')<CR>
-:inoremap [ []<ESC>i
-:inoremap ] <c-r>=ClosePair(']')<CR>
-:inoremap " ""<ESC>i
-:inoremap ' ''<ESC>i
-function! ClosePair(char)                   "remove duplicated bracket
-    if getline('.')[col('.') - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char
-    endif
-endfunction
-
 
 """"""""""""""""""""tag""""""""""""""""""""""
 set tags=tags;
