@@ -51,6 +51,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'matchit.zip'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 " The following plguin are recommanded 
 " Plugin 'rhysd/conflict-marker.vim'
@@ -92,7 +93,9 @@ filetype plugin indent on    " required
 """""""""""""""""""""""""END OF VUNDLE SETTING"""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-color molokai                                
+set t_Co=256
+set background=dark
+color solarized
 
 """"""""""""""keyword searching""""""""""""""
 set ignorecase smartcase   " not case sensetive, 
