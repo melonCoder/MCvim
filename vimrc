@@ -7,7 +7,7 @@ if has("gui_running")
 endif
 set nobackup                                 "no auto backup
 set tabstop=4
-set shiftwidth=2
+set shiftwidth=4
 set expandtab                                "tab --> space
 "set noexpandtab                             "space --> tab
 ":%retab!                                    "formatting
@@ -15,6 +15,8 @@ syntax on
 set backspace=indent,eol,start
 set autoindent
 set smartindent
+set list
+set listchars=trail:¶
 
 set tw=73
 set fo+=tcj "check h:fo-table for more details
@@ -42,7 +44,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
-Plugin 'kannokanno/previm'
 "support of ack-grep
     if executable('ack-grep')
         let g:ackprg="ack-grep -H --nocolor --nogroup --column"
@@ -52,10 +53,17 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'matchit.zip'
+Plugin 'yegappan/grep'
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'tyru/open-browser.vim'
-Plugin 'aklt/plantuml-syntax'
+Plugin 'Shougo/neocomplete.vim' "require lua
+Plugin 'Shougo/vimshell.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'vim-scripts/a.vim'
 Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'kannokanno/previm'
+"Plugin 'tyru/open-browser.vim'
 
 " The following plguin are recommanded 
 " Plugin 'rhysd/conflict-marker.vim'
@@ -96,10 +104,23 @@ filetype plugin indent on    " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""END OF VUNDLE SETTING"""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set t_Co=256
-set background=dark
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""LOCAL SETTING""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use local config{
+    if filereadable(expand("~/.vimrc.local"))
+        source ~/.vimrc.local
+    endif
+" }
+
+set t_Co=256 "this may or may not needed
+set background=light
 colorscheme PaperColor
+
+color molokai
 "color solarized
+"let g:solarized_termcolors=16
 
 """"""""""""""keyword searching""""""""""""""
 set ignorecase smartcase   " not case sensetive, 
@@ -114,7 +135,7 @@ set matchtime=2
 
 """"""""""""""""""""tag""""""""""""""""""""""
 set tags=tags;
-set autochdir
+"set autochdir "in comflict with vimproc
 map<C-n> :tnext<CR>
 "extra: +f(add file name as tags), +q(emphasize class for java and C++)
 map<C-F12> :!ctags -R                        
@@ -127,6 +148,7 @@ map<F12> :!ctags -R
   \--extra=+fq .<CR><CR>                             
 """""""""""""""""""""Tlist""""""""""""""""""""
 map<F3> :silent! Tlist<CR>
+map<F4> :Grep -i <CR>
 let Tlist_Ctags_Cmd='ctags'
 let Tlist_Use_Right_Window=1                  "tags in right side
 let Tlist_Sort_Type="name"                    "sort by name
@@ -143,14 +165,7 @@ let Tlist_Auto_Update=1
 map<F2> :silent! NERDTree<CR>
 let NERDTreeDirArrows=1                       "use arrow instead of plus
 let NERDTreeShowBookmarks=1                   "show bookmard
+let NERDTreeQuitOnOpen=1                      "quit on open
 
 autocmd!   BufNewFile,BufRead *               "disable auto-fold
 setlocal nofoldenable
-
-augroup PrevimSettings
-    autocmd!
-    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-augroup END
-
-let g:plantuml_executable_script='java -jar c:\utils\plantuml\plantuml.jar -tsvg $@'
-"let g:plantuml_executable_script=java-jar c:\utils\plantuml\plantuml.jar -graphvizdot 'c:\Program Files (x86)\Graphviz2.38\bin\dot.exe'
