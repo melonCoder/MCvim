@@ -18,7 +18,7 @@ set smartindent
 set list
 set listchars=trail:¶
 
-set tw=73
+set tw=80
 set fo+=tcj "check h:fo-table for more details
 "Mark ideal text width settings
 if v:version >= 703
@@ -62,6 +62,7 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'scrooloose/syntastic'
 "Plugin 'kannokanno/previm'
 "Plugin 'tyru/open-browser.vim'
 
@@ -169,3 +170,40 @@ let NERDTreeQuitOnOpen=1                      "quit on open
 
 autocmd!   BufNewFile,BufRead *               "disable auto-fold
 setlocal nofoldenable
+
+""""""""""""""""""""""Cscope***"""""""""""""""
+
+let mapleader=","
+nmap <leader>1 : call AutoLoadCscope()<CR>$<CR>
+nmap <leader>s : cscope find s <C-R>=expand("<cword>")<CR><CR> 
+nmap <leader>g : cscope find g <C-R>=expand("<cword>")<CR><CR> 
+nmap <leader>c : cscope find c <C-R>=expand("<cword>")<CR><CR> 
+nmap <leader>d : cscope find d <C-R>=expand("<cword>")<CR><CR> 
+nmap <leader>t : cscope find t <C-R>=expand("<cword>")<CR><CR> 
+nmap <leader>e : cscope find e <C-R>=expand("<cword>")<CR><CR> 
+nmap <leader>f : cscope find f <C-R>=expand("<cfile>")<CR><CR> 
+nmap <leader>i : cscope find i ^<C-R>=expand("<cfile>")<CR>$<CR> 
+
+function AutoLoadCscope()
+    let pwd=getcwd()
+    let pwdList=split(pwd, "/")
+    for idx in range(len(pwdList))
+        if pwdList[idx]=="helios-l-828"
+            call LoadCscope("helios-l-828")
+        elseif pwdList[idx]=="hisi-l-510"
+            call LoadCscope("hisi-l-510")
+        elseif pwdList[idx]=="titan-m-938"
+            call LoadCscope("titan-m-938")
+        endif
+    endfor
+endfunction
+
+function LoadCscope(dir)
+    let android_src="~/".a:dir
+    set csto=0
+    set nocsverb
+    exec "cscope add" android_src."/cscope/cscope.out"
+    exec "cscope show"
+    set csverb
+    set tags:./tags,tags,android_src."/cscope/tags"
+endfunction
