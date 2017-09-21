@@ -171,9 +171,12 @@ let NERDTreeQuitOnOpen=1                      "quit on open
 autocmd!   BufNewFile,BufRead *               "disable auto-fold
 setlocal nofoldenable
 
+let mapleader=","
+""""""""""""""""""""""JSON*****"""""""""""""""
+map <leader>jt <Esc>:%!python -m json.tool<CR>
+
 """"""""""""""""""""""Cscope***"""""""""""""""
 
-let mapleader=","
 nmap <leader>1 : call AutoLoadCscope()<CR>$<CR>
 nmap <leader>s : cscope find s <C-R>=expand("<cword>")<CR><CR> 
 nmap <leader>g : cscope find g <C-R>=expand("<cword>")<CR><CR> 
