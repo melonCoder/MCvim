@@ -1,6 +1,6 @@
-#MCvim
+# MCvim
 
-##installation
+## installation
 ```
 mkdir ~/.vim
 cd ~/.vim
