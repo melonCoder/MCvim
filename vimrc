@@ -116,10 +116,10 @@ filetype plugin indent on    " required
 " }
 
 set t_Co=256 "this may or may not needed
-set background=light
+set background=dark
 colorscheme PaperColor
 
-color molokai
+"color molokai
 "color solarized
 "let g:solarized_termcolors=16
 
